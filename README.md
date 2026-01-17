@@ -1,6 +1,6 @@
 # AutoIgnite
 
-Automatically activates furnaces and campfires when fuel and input items are placed inside, so you don't have to manually press the "Turn on" button.
+With this plugin, furnaces and campfires will start automatically whenever both fuel and input items are placed inside, so you no longer need to press the 'Turn on' button manually.
 
 ## Installation
 
