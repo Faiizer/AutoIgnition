@@ -46,9 +46,4 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
     public Query<ChunkStore> getQuery() {
         return this.benchComponentType;
     }
-
-    @Override
-    public boolean isParallel(int archetypeChunkSize, int taskCount) {
-        return true;
-    }
 }
