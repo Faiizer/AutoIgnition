@@ -105,7 +105,7 @@ public class BenchItemsTransferManager {
 
         if (needsOutputClear) {
             List<ItemContainer> validTargets = new ArrayList<>(neighbors);
-            validTargets.removeIf(c -> c == output || c == fuel || (BenchUtil.getInput(bench) != null && c == BenchUtil.getInput(bench)));
+            validTargets.removeIf(c -> c == output || c == fuel);
 
             ItemsUtil.distributeItems(output, validTargets);
         }
@@ -142,7 +142,7 @@ public class BenchItemsTransferManager {
                 if (visited.contains(neighborPos)) continue;
 
                 @SuppressWarnings({"removal", "deprecation"})
-                BlockState neighborState = world.getState(neighborPos.x, neighborPos.y, neighborPos.z, false);
+                BlockState neighborState = world.getState(neighborPos.x, neighborPos.y, neighborPos.z, true);
 
                 if (neighborState == null) {
                     visited.add(neighborPos);
