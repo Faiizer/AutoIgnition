@@ -4,10 +4,14 @@ import com.hypixel.hytale.builtin.crafting.state.ProcessingBenchState;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
+import com.hypixel.hytale.server.core.universe.world.chunk.ChunkFlag;
+import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import net.autoignition.AutoIgnitionMod;
 import net.autoignition.inventory.BenchProcessor;
 
 import javax.annotation.Nonnull;
+import java.util.logging.Level;
 
 /**
  * Main ticking system for AutoIgnition.
@@ -16,11 +20,13 @@ import javax.annotation.Nonnull;
 public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
 
     private final ComponentType<ChunkStore, ProcessingBenchState> benchComponentType;
+    private int errorCounter = 0;
 
     public AutoIgnitionSystem(ComponentType<ChunkStore, ProcessingBenchState> benchComponentType) {
         this.benchComponentType = benchComponentType;
     }
 
+    @SuppressWarnings("removal")
     @Override
     public void tick(
             float dt,
@@ -32,7 +38,19 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
         ProcessingBenchState bench = archetypeChunk.getComponent(entityIndex, this.benchComponentType);
         if (bench == null) return;
 
-        BenchProcessor.handle(bench);
+        WorldChunk chunk = bench.getChunk();
+        if (chunk == null || !chunk.is(ChunkFlag.TICKING)) {
+            return;
+        }
+
+        try {
+            BenchProcessor.handle(bench);
+        } catch (Exception e) {
+            if (errorCounter++ % 100 == 0) {
+                AutoIgnitionMod.getInstance().getLogger().at(Level.SEVERE)
+                        .log("Error processing bench (logged every 100 failures): " + e.getMessage());
+            }
+        }
     }
 
     @Override
