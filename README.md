@@ -6,9 +6,8 @@
 
 - **Auto-Start:** Forget manual toggling. Benches ignite instantly as soon as valid fuel and input materials are available.
 - **Fuel Conservation:** Automatically extinguishes the bench when the recipe is complete or inputs run out, saving your precious resources.
-- **Auto-Refuel:** Periodically scans neighboring containers to pull compatible fuel into the bench.
+- **Auto-Refuel:** Periodically scans neighboring containers to pull compatible fuel into the bench. If no fuel is found in nearby chests, the mod will try to reuse fuel from the bench's own output slot.
 - **Auto-Output:** Automatically moves output items from the output slot into adjacent chests.
-- **Automated Output:** Clears finished products from the bench and stores them in adjacent chests, allowing for continuous production.
 
 ## 🛠 Installation
 
@@ -25,15 +24,16 @@ The plugin will generate a configuration file. You can modify this file.
 
 ### Configuration Options
 
-| Option                 | Type    | Default                 | Description                                                                                 |
-|:-----------------------|:--------|:------------------------|:--------------------------------------------------------------------------------------------|
-| `UpdateIntervalMs`     | Long    | `1000`                  | The delay (in milliseconds) between items transfer. Higher values reduce server load.       |
-| `ScannerIntervalMs`    | Long    | `10000`                 | The delay (in milliseconds) between containers scan. Higher values reduce server load.      |
-| `EnableOutputTransfer` | Boolean | `true`                  | If enabled, automatically moves finished products from benches to nearby chests.            |
-| `EnableAutoRefuel`     | Boolean | `true`                  | If enabled, automatically pulls fuel from nearby chests into the bench.                     |
-| `EnableAutoFuelStart`  | Boolean | `true`                  | If enabled, automatically ignites the bench when both fuel and input materials are present. |
-| `EnableAutoFuelStop`   | Boolean | `true`                  | If enabled, automatically extinguishes the bench when the recipe is finished to save fuel.  |
-| `BlacklistedFuelItems` | List    | `["Wood_Sallow_Trunk"]` | List of Item IDs that should never be used as fuel by the automation.                       |
+| Option                  | Type    | Default                   | Description                                                                                 |
+|:------------------------|:--------|:--------------------------|:--------------------------------------------------------------------------------------------|
+| `UpdateIntervalMs`      | Long    | `1000`                    | The delay (in milliseconds) between items transfer. Higher values reduce server load.       |
+| `ScannerIntervalMs`     | Long    | `10000`                   | The delay (in milliseconds) between containers scan. Higher values reduce server load.      |
+| `EnableOutputTransfer`  | Boolean | `true`                    | If enabled, automatically moves finished products from benches to nearby chests.            |
+| `EnableAutoRefuel`      | Boolean | `true`                    | If enabled, automatically pulls fuel from nearby chests into the bench.                     |
+| `EnableAutoFuelStart`   | Boolean | `true`                    | If enabled, automatically ignites the bench when both fuel and input materials are present. |
+| `EnableAutoFuelStop`    | Boolean | `true`                    | If enabled, automatically extinguishes the bench when the recipe is finished to save fuel.  |
+| `BlacklistedFuelItems`  | List    | `["Wood_Sallow_Trunk"]`   | List of Item IDs that should never be used as fuel by the automation.                       |
+| `BlacklistedInputItems` | List    | `["Ingredient_Bar_Gold"]` | A list of item IDs that the mod is forbidden from pulling as ingredients.                   |
 
 ### Example Config
 
@@ -42,11 +42,15 @@ The plugin will generate a configuration file. You can modify this file.
   "UpdateIntervalMs": 1000,
   "ScannerIntervalMs": 10000,
   "EnableOutputTransfer": true,
+  "EnableInputTransfer": true,
   "EnableAutoRefuel": true,
   "EnableAutoFuelStart": true,
   "EnableAutoFuelStop": true,
   "BlacklistedFuelItems": [
     "Wood_Sallow_Trunk"
+  ],
+  "BlacklistedInputItems": [
+    "Ingredient_Bar_Gold"
   ]
 }
 ```
