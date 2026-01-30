@@ -1,16 +1,20 @@
 {
-    "Group": "Lutia",
+    "Group": "AutoIgnition",
     "Name": "AutoIgnition",
-    "Version": "2.0.3",
-    "Description": "Automatically activates benches when fuel and input items are placed inside, and transfers items to and from nearby chests.",
+    "Version": "3.0.0",
+    "Description": "Automated fuel management and auto-ignition for crafting benches. Effortlessly syncs inputs and outputs with nearby storage.",
     "Authors": [
         {
             "Name": "Lutia",
             "Email": "lukkoedm@gmail.com"
+        },
+        {
+            "Name": "Faiizer",
+            "Email": "lucas.cofrancou@gmail.com"
         }
     ],
     "Website": "https://www.curseforge.com/hytale/mods/autoignition",
-    "Main": "com.lutia.autoignition.AutoIgnitionPlugin",
+    "Main": "net.autoignition.AutoIgnitionMod",
     "DisabledByDefault": false,
     "ServerVersion": "*",
     "IncludesAssetPack": false
