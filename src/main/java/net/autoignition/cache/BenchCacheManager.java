@@ -1,5 +1,6 @@
 package net.autoignition.cache;
 
+import com.hypixel.hytale.builtin.crafting.state.ProcessingBenchState;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.World;
 import net.autoignition.AutoIgnitionMod;
@@ -23,19 +24,20 @@ public class BenchCacheManager {
      * If the cache exists but is outdated based on the scanner interval, it triggers a re-scan.
      * @param position The world coordinates of the bench.
      * @param world The world instance required for neighborhood scanning.
+     * @param bench The processing bench state instance.
      * @return The up-to-date {@link BenchCache} for the given position.
      */
-    public static BenchCache getOrCreate(Vector3i position, World world) {
+    public static BenchCache getOrCreate(Vector3i position, World world, ProcessingBenchState bench) {
         BenchCache cache = CACHE_MAP.computeIfAbsent(position, k -> {
             BenchCache newCache = new BenchCache();
-            NeighborScanner.scan(world, k, newCache);
+            NeighborScanner.scan(world, k, newCache, bench);
             return newCache;
         });
 
         AutoIgnitionConfig config = AutoIgnitionMod.getConfig();
 
         if (cache.needsRescan(config.getScannerIntervalMs())) {
-            NeighborScanner.scan(world, position, cache);
+            NeighborScanner.scan(world, position, cache, bench);
         }
 
         return cache;

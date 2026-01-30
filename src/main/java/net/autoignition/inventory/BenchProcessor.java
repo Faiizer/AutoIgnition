@@ -31,7 +31,7 @@ public class BenchProcessor {
         Vector3i position = bench.getBlockPosition();
         World world = chunk.getWorld();
 
-        BenchCache cache = BenchCacheManager.getOrCreate(position, world);
+        BenchCache cache = BenchCacheManager.getOrCreate(position, world, bench);
 
         AutoIgnitionConfig config = AutoIgnitionMod.getConfig();
 

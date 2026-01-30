@@ -1,5 +1,6 @@
 package net.autoignition.inventory;
 
+import com.hypixel.hytale.builtin.crafting.state.ProcessingBenchState;
 import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
@@ -23,20 +24,47 @@ public class NeighborScanner {
     };
 
     /**
-     * Performs a neighborhood scan to locate valid item containers.
-     * Discovered positions are stored in the provided {@link BenchCache}.
-     * @param world The world instance.
+     * Scans the surrounding area of a processing bench to identify and cache nearby item containers.
+     * <p>This method performs a primary scan around the initial block and then checks
+     * immediate neighbors for blocks sharing the same {@link ProcessingBenchState}.
+     * This ensures that multi-block structures (like 2-block long furnaces) have their
+     * entire footprint scanned for adjacent storage.</p>
+     *
+     * @param world The world instance where the scan is performed.
      * @param position The bench's position.
-     * @param cache The cache to be updated with new container positions.
+     * @param cache The {@link BenchCache} where discovered container positions are stored.
+     * @param bench The state instance used to identify connected blocks of the same bench.
      */
-    public static void scan(World world, Vector3i position, BenchCache cache) {
+    @SuppressWarnings("deprecation")
+    public static void scan(World world, Vector3i position, BenchCache cache, ProcessingBenchState bench) {
         cache.getContainerPositions().clear();
         ChunkStore store = world.getChunkStore();
 
+        scanAt(world, position, store, cache);
+
         for (Vector3i offset : OFFSETS) {
-            int x = position.x + offset.x;
-            int y = position.y + offset.y;
-            int z = position.z + offset.z;
+            Vector3i neighborPos = new Vector3i(position.x + offset.x, position.y + offset.y, position.z + offset.z);
+
+            if (world.getState(neighborPos.x, neighborPos.y, neighborPos.z, true) == bench) {
+                scanAt(world, neighborPos, store, cache);
+            }
+        }
+
+        cache.updateScanTime();
+    }
+
+    /**
+     * Internal helper to check the 4 cardinal directions around a specific coordinate for containers.
+     * @param world The world instance.
+     * @param pos The coordinate to scan around.
+     * @param store The ChunkStore to verify chunk loading states.
+     * @param cache The cache to populate with found containers.
+     */
+    private static void scanAt(World world, Vector3i pos, ChunkStore store, BenchCache cache) {
+        for (Vector3i offset : OFFSETS) {
+            int x = pos.x + offset.x;
+            int y = pos.y + offset.y;
+            int z = pos.z + offset.z;
 
             long chunkIndex = ChunkUtil.indexChunk(x >> 4, z >> 4);
             if (store.getChunkReference(chunkIndex) == null) continue;
@@ -45,8 +73,6 @@ public class NeighborScanner {
                 cache.getContainerPositions().add(new Vector3i(x, y, z));
             }
         }
-
-        cache.updateScanTime();
     }
 
     /**
