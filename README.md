@@ -49,3 +49,23 @@ The plugin will generate a configuration file. You can modify this file.
     "Wood_Sallow_Trunk"
   ]
 }
+```
+
+# 💬 Feedback & Bug Reports
+
+Your feedback is essential for the growth of AutoIgnition! 
+- **Found a bug?** Please open an issue on the [GitHub Repository](https://github.com/lukkoedm/AutoIgnition/issues) or report it in the CurseForge comments.
+- **Suggestions?** If you have ideas to improve the automation or performance, don't hesitate to reach out.
+
+# 🚀 Future Roadmap (Planned Features)
+
+We are currently brainstorming and developing new ways to enhance your automation setup. Here is what we are considering for future updates:
+
+- **Priority Storage:** Define which chests should be filled or emptied first.
+- **Filter Logic:** Detailed input/output filters (e.g., only move Iron Ore to this specific furnace).
+- **Expansion Upgrades:** New config options to increase the scanning radius beyond the 6 immediate neighbors.
+- **GUI Integration:** A simple in-game interface to toggle features per-bench.
+
+### **These features will not necessarily be implemented. They are potential ideas. It all depends on what users want!**
+
+*Have a feature in mind? Let us know!*
