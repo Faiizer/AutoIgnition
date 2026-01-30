@@ -100,7 +100,6 @@ public class AutoIgnitionMod extends JavaPlugin {
         } catch (Exception e) {
             log(Level.SEVERE, "Task registration failed: " + e.getMessage());
         }
-
     }
 
     /**

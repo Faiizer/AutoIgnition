@@ -10,9 +10,6 @@ import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerSta
 import net.autoignition.AutoIgnitionMod;
 import net.autoignition.cache.BenchCache;
 
-import java.util.List;
-import java.util.logging.Level;
-
 /**
  * Handles the physical movement of items between benches and external storage.
  * Manages both refueling logic and output extraction by iterating through
