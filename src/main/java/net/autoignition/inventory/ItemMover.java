@@ -23,6 +23,7 @@ public class ItemMover {
     // TODO: Wait for new methods
     /**
      * Attempts to refill the bench's fuel slot from cached nearby containers.
+     * If no fuel is found externally, it attempts to recycle fuel from its own output.
      * @param bench The bench requiring fuel.
      * @param world The world instance.
      * @param cache The bench's cache.
@@ -31,6 +32,7 @@ public class ItemMover {
     public static void refillFuel(ProcessingBenchState bench, World world, BenchCache cache) {
         CombinedItemContainer combinedItemContainer = bench.getItemContainer();
         ItemContainer fuelContainer = combinedItemContainer.getContainer(0);
+        ItemContainer outputContainer = combinedItemContainer.getContainer(2);
 
         if (!fuelContainer.isEmpty()) return;
 
@@ -40,9 +42,11 @@ public class ItemMover {
 
                 transferFuel(chestContainer, fuelContainer);
 
-                if (!fuelContainer.isEmpty()) break;
+                if (!fuelContainer.isEmpty()) return;
             }
         }
+
+        transferFuel(outputContainer, fuelContainer);
     }
 
     /**
@@ -52,7 +56,7 @@ public class ItemMover {
      * @param destination The bench's internal fuel container.
      */
     private static void transferFuel(ItemContainer source, ItemContainer destination) {
-        if (destination == null || destination.getCapacity() == 0) return;
+        if (source == null || source.isEmpty() || destination == null || destination.getCapacity() == 0) return;
 
         for (short i = 0; i < source.getCapacity(); i++) {
             ItemStack itemStack = source.getItemStack(i);
