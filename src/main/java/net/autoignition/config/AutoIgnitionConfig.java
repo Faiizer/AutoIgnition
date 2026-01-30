@@ -46,7 +46,7 @@ public class AutoIgnitionConfig {
     }
 
     public boolean isEnableAutoRefuel() {
-        return EnableOutputTransfer;
+        return EnableAutoRefuel;
     }
 
     public boolean isEnableAutoFuelStart() {
@@ -54,7 +54,7 @@ public class AutoIgnitionConfig {
     }
 
     public boolean isEnableAutoFuelStop() {
-        return EnableOutputTransfer;
+        return EnableAutoFuelStop;
     }
 
     public List<String> getBlacklistedFuelItems() {
