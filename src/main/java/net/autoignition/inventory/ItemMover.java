@@ -10,6 +10,9 @@ import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerSta
 import net.autoignition.AutoIgnitionMod;
 import net.autoignition.cache.BenchCache;
 
+import java.util.List;
+import java.util.logging.Level;
+
 /**
  * Handles the physical movement of items between benches and external storage.
  * Manages both refueling logic and output extraction by iterating through
@@ -100,6 +103,45 @@ public class ItemMover {
             ItemStack itemStack = source.getItemStack(i);
 
             if (itemStack != null) {
+                if (destination.canAddItemStack(itemStack)) {
+                    source.moveItemStackFromSlot(i, destination);
+                }
+            }
+        }
+    }
+
+    // TODO: Wait for new methods
+    /**
+     * Automatically fills the bench's input slots from nearby storage.
+     * @param bench The bench to fill the input.
+     * @param world The world instance.
+     * @param cache The bench's cache.
+     */
+    @SuppressWarnings("deprecation")
+    public static void refillInput(ProcessingBenchState bench, World world, BenchCache cache) {
+        CombinedItemContainer combinedItemContainer = bench.getItemContainer();
+        ItemContainer inputContainer = combinedItemContainer.getContainer(1);
+
+        for (Vector3i position : cache.getContainerPositions()) {
+            if (world.getState(position.x, position.y, position.z, true) instanceof ItemContainerState itemContainerState) {
+                ItemContainer chestContainer = itemContainerState.getItemContainer();
+
+                transferInput(chestContainer, inputContainer);
+            }
+        }
+    }
+
+    /**
+     * Internal logic for moving input items from external storage.
+     * @param source The external storage container.
+     * @param destination The bench's internal input container.
+     */
+    private static void transferInput(ItemContainer source, ItemContainer destination) {
+        for (short i = 0; i < source.getCapacity(); i++) {
+            ItemStack itemStack = source.getItemStack(i);
+            if (itemStack != null) {
+                if (AutoIgnitionMod.getConfig().getBlacklistedInputItems().contains(itemStack.getItemId())) continue;
+
                 if (destination.canAddItemStack(itemStack)) {
                     source.moveItemStackFromSlot(i, destination);
                 }

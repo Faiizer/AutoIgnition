@@ -18,10 +18,12 @@ public class AutoIgnitionConfig {
     private long UpdateIntervalMs = 1000L;
     private long ScannerIntervalMs = 10000L;
     private boolean EnableOutputTransfer = true;
+    private boolean EnableInputTransfer = true;
     private boolean EnableAutoRefuel = true;
     private boolean EnableAutoFuelStart = true;
     private boolean EnableAutoFuelStop = true;
     private List<String> BlacklistedFuelItems = new ArrayList<>(List.of("Wood_Sallow_Trunk"));
+    private List<String> BlacklistedInputItems = new ArrayList<>(List.of("Ingredient_Bar_Gold"));
 
 
     public AutoIgnitionConfig() { }
@@ -39,6 +41,10 @@ public class AutoIgnitionConfig {
         return EnableOutputTransfer;
     }
 
+    public boolean isEnableInputTransfer() {
+        return EnableInputTransfer;
+    }
+
     public boolean isEnableAutoRefuel() {
         return EnableOutputTransfer;
     }
@@ -53,6 +59,9 @@ public class AutoIgnitionConfig {
 
     public List<String> getBlacklistedFuelItems() {
         return BlacklistedFuelItems;
+    }
+    public List<String> getBlacklistedInputItems() {
+        return BlacklistedInputItems;
     }
 
 
@@ -70,21 +79,29 @@ public class AutoIgnitionConfig {
                                 (config, value, info) -> config.EnableOutputTransfer = value,
                                 (config, info) -> config.EnableOutputTransfer)
                         .add()
-                        .append(new KeyedCodec<>("EnableAutoRefuel", Codec.BOOLEAN),
-                                (config, value, info) -> config.EnableAutoRefuel = value,
-                                (config, info) -> config.EnableAutoRefuel)
+                        .append(new KeyedCodec<>("EnableInputTransfer", Codec.BOOLEAN),
+                                (config, value, info) -> config.EnableInputTransfer = value,
+                                (config, info) -> config.EnableInputTransfer)
                         .add()
-                    .append(new KeyedCodec<>("EnableAutoFuelStart", Codec.BOOLEAN),
-                            (config, value, info) -> config.EnableAutoFuelStart = value,
-                            (config, info) -> config.EnableAutoFuelStart)
-                    .add()
-                    .append(new KeyedCodec<>("EnableAutoFuelStop", Codec.BOOLEAN),
-                            (config, value, info) -> config.EnableAutoFuelStop = value,
-                            (config, info) -> config.EnableAutoFuelStop)
-                    .add()
+                            .append(new KeyedCodec<>("EnableAutoRefuel", Codec.BOOLEAN),
+                                    (config, value, info) -> config.EnableAutoRefuel = value,
+                                    (config, info) -> config.EnableAutoRefuel)
+                            .add()
+                        .append(new KeyedCodec<>("EnableAutoFuelStart", Codec.BOOLEAN),
+                                (config, value, info) -> config.EnableAutoFuelStart = value,
+                                (config, info) -> config.EnableAutoFuelStart)
+                        .add()
+                        .append(new KeyedCodec<>("EnableAutoFuelStop", Codec.BOOLEAN),
+                                (config, value, info) -> config.EnableAutoFuelStop = value,
+                                (config, info) -> config.EnableAutoFuelStop)
+                        .add()
                         .append(new KeyedCodec<>("BlacklistedFuelItems", Codec.STRING_ARRAY),
                                 (config, value, info) -> config.BlacklistedFuelItems = new ArrayList<>(Arrays.asList(value)),
                                 (config, info) -> config.BlacklistedFuelItems.toArray(new String[0]))
+                        .add()
+                        .append(new KeyedCodec<>("BlacklistedInputItems", Codec.STRING_ARRAY),
+                                (config, value, info) -> config.BlacklistedInputItems = new ArrayList<>(Arrays.asList(value)),
+                                (config, info) -> config.BlacklistedInputItems.toArray(new String[0]))
                         .add()
                         .build();
 

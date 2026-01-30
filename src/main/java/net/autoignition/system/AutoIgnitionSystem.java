@@ -33,13 +33,6 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
         ProcessingBenchState bench = archetypeChunk.getComponent(entityIndex, this.benchComponentType);
         if (bench == null) return;
 
-        CombinedItemContainer container = bench.getItemContainer();
-        boolean hasItems = !container.getContainer(1).isEmpty() || !container.getContainer(2).isEmpty();
-
-        if (!bench.isActive() && !hasItems) {
-            return;
-        }
-
         BenchProcessor.handle(bench);
     }
 

@@ -58,6 +58,7 @@ public class BenchProcessor {
         AutoIgnitionConfig config = AutoIgnitionMod.getConfig();
 
         if (config.isEnableAutoRefuel()) ItemMover.refillFuel(bench, world, cache);
+        if (config.isEnableInputTransfer()) ItemMover.refillInput(bench, world, cache);
         if (config.isEnableOutputTransfer()) ItemMover.emptyOutput(bench, world, cache);
     }
 
