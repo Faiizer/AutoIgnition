@@ -1,12 +1,12 @@
 # AutoIgnition
 
-**AutoIgnition** is a high-performance **Hytale mod** designed to streamline your crafting experience. It transforms standard processing benches—like furnaces and campfires—into smart, automated workstations that manage their own resources and ignition states.
+**AutoIgnition** is a **Hytale plugin** that automates benches. It automatically starts processing benches (like furnaces and campfires) when items are added. Also, it transfers items to and from nearby chests.
 
 ## Features
 
-- **Auto-Start:** Forget manual toggling. Benches ignite instantly as soon as valid fuel and input materials are available.
+- **Auto-Start:** No longer need manually pressing the "Turn on" button. Processing starts immediately when fuel and input items are added.
 - **Fuel Conservation:** Automatically extinguishes the bench when the recipe is complete or inputs run out, saving your precious resources.
-- **Auto-Refuel:** Periodically scans neighboring containers to pull compatible fuel into the bench. If no fuel is found in nearby chests, the mod will try to reuse fuel from the bench's own output slot.
+- **Auto-Refuel:** Automatically takes fuel items from adjacent chests or output slot into the bench's fuel slot.
 - **Auto-Output:** Automatically moves output items from the output slot into adjacent chests.
 
 ## 🛠 Installation
@@ -58,19 +58,17 @@ The plugin will generate a configuration file. You can modify this file.
 
 # 💬 Feedback & Bug Reports
 
-Your feedback is essential for the growth of AutoIgnition! 
-- **Found a bug?** Please open an issue on the [GitHub Repository](https://github.com/lukkoedm/AutoIgnition/issues) or report it in the CurseForge comments.
-- **Suggestions?** If you have ideas to improve the automation or performance, don't hesitate to reach out.
+Your feedback is important for the growth of AutoIgnition! 
+- **Found a bug?** Please open an issue on the [GitHub Repository](https://github.com/lukkoedm/AutoIgnition/issues) or tell us in the CurseForge comments.
+- **Suggestions?** If you have ideas to improve the plugin, don't hesitate to reach out.
 
-# 🚀 Future Roadmap (Planned Features)
+# 🚀 Future Roadmap
 
-We are currently brainstorming and developing new ways to enhance your automation setup. Here is what we are considering for future updates:
+We are currently brainstorming and developing ideas to improve the plugin. Here is what we are considering for future updates:
 
 - **Priority Storage:** Define which chests should be filled or emptied first.
-- **Filter Logic:** Detailed input/output filters (e.g., only move Iron Ore to this specific furnace).
-- **Expansion Upgrades:** New config options to increase the scanning radius beyond the 6 immediate neighbors.
-- **GUI Integration:** A simple in-game interface to toggle features per-bench.
+- **Filter Logic:** Input/output filters (e.g., only move Iron Ore to this specific furnace).
+- **More configuration options:** New config options to increase the scanning radius beyond the 6 immediate neighbors.
+- **GUI Integration:** A simple in-game interface for more convenient configuration.
 
 ### **These features will not necessarily be implemented. They are potential ideas. It all depends on what users want!**
-
-*Have a feature in mind? Let us know!*
