@@ -6,9 +6,11 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.CombinedItemContainer;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerState;
 import net.autoignition.AutoIgnitionMod;
 import net.autoignition.cache.BenchCache;
+import net.autoignition.util.AutoIgnitionChunkUtil;
 
 /**
  * Handles the physical movement of items between benches and external storage.
@@ -25,7 +27,6 @@ public class ItemMover {
      * @param world The world instance.
      * @param cache The bench's cache.
      */
-    @SuppressWarnings("deprecation")
     public static void refillFuel(ProcessingBenchState bench, World world, BenchCache cache) {
         CombinedItemContainer combinedItemContainer = bench.getItemContainer();
         ItemContainer fuelContainer = combinedItemContainer.getContainer(0);
@@ -34,12 +35,15 @@ public class ItemMover {
         if (!fuelContainer.isEmpty()) return;
 
         for (Vector3i position : cache.getContainerPositions()) {
-            if (world.getState(position.x, position.y, position.z, true) instanceof ItemContainerState itemContainerState) {
-                ItemContainer chestContainer = itemContainerState.getItemContainer();
+            WorldChunk chunk = AutoIgnitionChunkUtil.getSafeChunkFromBlock(world, position);
+            if (chunk != null) {
+                if (chunk.getState(position.x, position.y, position.z) instanceof ItemContainerState itemContainerState) {
+                    ItemContainer chestContainer = itemContainerState.getItemContainer();
 
-                transferFuel(chestContainer, fuelContainer);
+                    transferFuel(chestContainer, fuelContainer);
 
-                if (!fuelContainer.isEmpty()) return;
+                    if (!fuelContainer.isEmpty()) return;
+                }
             }
         }
 
@@ -76,7 +80,6 @@ public class ItemMover {
      * @param world The world instance.
      * @param cache The bench's cache.
      */
-    @SuppressWarnings("deprecation")
     public static void emptyOutput(ProcessingBenchState bench, World world, BenchCache cache) {
         CombinedItemContainer combinedItemContainer = bench.getItemContainer();
         ItemContainer outputContainer = combinedItemContainer.getContainer(2);
@@ -84,12 +87,15 @@ public class ItemMover {
         if (outputContainer.isEmpty()) return;
 
         for (Vector3i position : cache.getContainerPositions()) {
-            if (world.getState(position.x, position.y, position.z, true) instanceof ItemContainerState itemContainerState) {
-                ItemContainer chestContainer = itemContainerState.getItemContainer();
+            WorldChunk chunk = AutoIgnitionChunkUtil.getSafeChunkFromBlock(world, position);
+            if (chunk != null) {
+                if (chunk.getState(position.x, position.y, position.z) instanceof ItemContainerState itemContainerState) {
+                    ItemContainer chestContainer = itemContainerState.getItemContainer();
 
-                transferOutput(outputContainer, chestContainer);
+                    transferOutput(outputContainer, chestContainer);
 
-                if (outputContainer.isEmpty()) break;
+                    if (outputContainer.isEmpty()) break;
+                }
             }
         }
     }
@@ -118,16 +124,18 @@ public class ItemMover {
      * @param world The world instance.
      * @param cache The bench's cache.
      */
-    @SuppressWarnings("deprecation")
     public static void refillInput(ProcessingBenchState bench, World world, BenchCache cache) {
         CombinedItemContainer combinedItemContainer = bench.getItemContainer();
         ItemContainer inputContainer = combinedItemContainer.getContainer(1);
 
         for (Vector3i position : cache.getContainerPositions()) {
-            if (world.getState(position.x, position.y, position.z, true) instanceof ItemContainerState itemContainerState) {
-                ItemContainer chestContainer = itemContainerState.getItemContainer();
+            WorldChunk chunk = AutoIgnitionChunkUtil.getSafeChunkFromBlock(world, position);
+            if (chunk != null) {
+                if (chunk.getState(position.x, position.y, position.z) instanceof ItemContainerState itemContainerState) {
+                    ItemContainer chestContainer = itemContainerState.getItemContainer();
 
-                transferInput(chestContainer, inputContainer);
+                    transferInput(chestContainer, inputContainer);
+                }
             }
         }
     }

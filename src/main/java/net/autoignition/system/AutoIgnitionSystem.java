@@ -4,6 +4,8 @@ import com.hypixel.hytale.builtin.crafting.state.ProcessingBenchState;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
+import com.hypixel.hytale.server.core.universe.world.chunk.ChunkFlag;
+import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import net.autoignition.inventory.BenchProcessor;
 
@@ -21,6 +23,7 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
         this.benchComponentType = benchComponentType;
     }
 
+    @SuppressWarnings("removal")
     @Override
     public void tick(
             float dt,
@@ -31,6 +34,12 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
     ) {
         ProcessingBenchState bench = archetypeChunk.getComponent(entityIndex, this.benchComponentType);
         if (bench == null) return;
+
+        WorldChunk chunk = bench.getChunk();
+        if (chunk == null) return;
+
+        boolean isChunkTicking = chunk.is(ChunkFlag.TICKING);
+        if (!isChunkTicking) return;
 
         BenchProcessor.handle(bench);
     }

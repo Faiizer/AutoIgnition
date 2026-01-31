@@ -25,7 +25,7 @@ public class BenchCache {
      */
     public BenchCache() {
         this.lastScanTime = System.currentTimeMillis();
-        this.lastRunTime = 0;
+        this.lastRunTime = System.currentTimeMillis();
     }
 
     /**
