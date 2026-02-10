@@ -24,11 +24,13 @@ public class AutoIgnitionConfig {
     private boolean EnableAutoFuelStop = true;
     private List<String> BlacklistedFuelItems = new ArrayList<>(List.of("Wood_Sallow_Trunk"));
     private List<String> BlacklistedInputItems = new ArrayList<>(List.of("Ingredient_Bar_Gold"));
+    private List<String> BlacklistedProcessorBenches = new ArrayList<>();
 
 
     public AutoIgnitionConfig() { }
 
 
+    // GETTERS
     public long getUpdateIntervalMs() {
         return Math.max(500L, UpdateIntervalMs);
     }
@@ -63,6 +65,25 @@ public class AutoIgnitionConfig {
     public List<String> getBlacklistedInputItems() {
         return BlacklistedInputItems;
     }
+    public List<String> getBlacklistedProcessorBenches() {
+        return BlacklistedProcessorBenches;
+    }
+
+
+    // SETTERS
+    public void setEnableOutputTransfer(boolean value) { EnableOutputTransfer = value; }
+
+    public void setEnableInputTransfer(boolean value) { EnableInputTransfer = value; }
+
+    public void setEnableAutoRefuel(boolean value) { EnableAutoRefuel = value; }
+
+    public void setEnableAutoFuelStart(boolean value) { EnableAutoFuelStart = value; }
+
+    public void setEnableAutoFuelStop(boolean value) { EnableAutoFuelStop = value; }
+
+    public void setUpdateIntervalMs(long value) { UpdateIntervalMs = value; }
+
+    public void setScannerIntervalMs(long value) { ScannerIntervalMs = value; }
 
 
     static {
@@ -102,6 +123,10 @@ public class AutoIgnitionConfig {
                         .append(new KeyedCodec<>("BlacklistedInputItems", Codec.STRING_ARRAY),
                                 (config, value, info) -> config.BlacklistedInputItems = new ArrayList<>(Arrays.asList(value)),
                                 (config, info) -> config.BlacklistedInputItems.toArray(new String[0]))
+                        .add()
+                        .append(new KeyedCodec<>("BlacklistedProcessorBenches", Codec.STRING_ARRAY),
+                                (config, value, info) -> config.BlacklistedProcessorBenches = new ArrayList<>(Arrays.asList(value)),
+                                (config, info) -> config.BlacklistedProcessorBenches.toArray(new String[0]))
                         .add()
                         .build();
 

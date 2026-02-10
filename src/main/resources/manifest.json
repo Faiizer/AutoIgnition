@@ -1,7 +1,7 @@
 {
     "Group": "AutoIgnition",
     "Name": "AutoIgnition",
-    "Version": "3.0.2",
+    "Version": "3.0.3",
     "Description": "Automated fuel management and auto-ignition for crafting benches. Effortlessly syncs inputs and outputs with nearby storage.",
     "Authors": [
         {
@@ -17,5 +17,5 @@
     "Main": "net.autoignition.AutoIgnitionMod",
     "DisabledByDefault": false,
     "ServerVersion": "*",
-    "IncludesAssetPack": false
+    "IncludesAssetPack": true
 }

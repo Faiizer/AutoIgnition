@@ -123,6 +123,10 @@ public class AutoIgnitionMod extends JavaPlugin {
         }
     }
 
+    public void saveConfig() {
+        configContainer.save();
+    }
+
     public static AutoIgnitionMod getInstance() { return INSTANCE; }
 
     public static AutoIgnitionConfig getConfig() { return config; }

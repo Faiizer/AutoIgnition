@@ -12,6 +12,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import net.autoignition.AutoIgnitionMod;
 import net.autoignition.command.subcommand.autoignition.HelpSubCommand;
 import net.autoignition.command.subcommand.autoignition.ReloadConfigSubCommand;
+import net.autoignition.command.subcommand.autoignition.SettingsSubCommand;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,6 +25,7 @@ public class AutoIgnitionCommand extends AbstractCommand {
         super("autoignition", "Main command for AutoIgnition");
         this.addSubCommand(new HelpSubCommand());
         this.addSubCommand(new ReloadConfigSubCommand());
+        this.addSubCommand(new SettingsSubCommand());
     }
 
     @Override

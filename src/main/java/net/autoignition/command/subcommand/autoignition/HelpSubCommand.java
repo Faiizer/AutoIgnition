@@ -39,6 +39,7 @@ public class HelpSubCommand extends AbstractAsyncCommand {
                 /autoignition -> Show mod info.
                 /autoignition help -> Show this message.
                 /autoignition reload -> Reload the mod configuration.
+                /autoignition settings -> Change mod configuration.
                 ====================
                 """;
 

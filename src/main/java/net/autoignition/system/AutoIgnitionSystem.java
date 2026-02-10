@@ -7,9 +7,12 @@ import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.server.core.universe.world.chunk.ChunkFlag;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import net.autoignition.AutoIgnitionMod;
+import net.autoignition.config.AutoIgnitionConfig;
 import net.autoignition.inventory.BenchProcessor;
 
 import javax.annotation.Nonnull;
+import java.util.logging.Level;
 
 /**
  * Main ticking system for AutoIgnition.
@@ -34,6 +37,7 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
     ) {
         ProcessingBenchState bench = archetypeChunk.getComponent(entityIndex, this.benchComponentType);
         if (bench == null) return;
+        if (AutoIgnitionMod.getConfig().getBlacklistedProcessorBenches().contains(bench.getBench().getId())) return;
 
         WorldChunk chunk = bench.getChunk();
         if (chunk == null) return;
