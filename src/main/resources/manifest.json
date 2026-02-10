@@ -17,5 +17,5 @@
     "Main": "net.autoignition.AutoIgnitionMod",
     "DisabledByDefault": false,
     "ServerVersion": "*",
-    "IncludesAssetPack": false
+    "IncludesAssetPack": true
 }
