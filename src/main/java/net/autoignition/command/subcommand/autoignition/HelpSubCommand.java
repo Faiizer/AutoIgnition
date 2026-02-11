@@ -40,6 +40,7 @@ public class HelpSubCommand extends AbstractAsyncCommand {
                 /autoignition help -> Show this message.
                 /autoignition reload -> Reload the mod configuration.
                 /autoignition settings -> Change mod configuration.
+                /autoignition benchid -> Give the id of the targeted bench.
                 ====================
                 """;
 

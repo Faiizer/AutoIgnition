@@ -13,6 +13,7 @@ import net.autoignition.AutoIgnitionMod;
 import net.autoignition.command.subcommand.autoignition.HelpSubCommand;
 import net.autoignition.command.subcommand.autoignition.ReloadConfigSubCommand;
 import net.autoignition.command.subcommand.autoignition.SettingsSubCommand;
+import net.autoignition.command.subcommand.autoignition.TargetIdSubCommand;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -26,6 +27,7 @@ public class AutoIgnitionCommand extends AbstractCommand {
         this.addSubCommand(new HelpSubCommand());
         this.addSubCommand(new ReloadConfigSubCommand());
         this.addSubCommand(new SettingsSubCommand());
+        this.addSubCommand(new TargetIdSubCommand());
     }
 
     @Override
