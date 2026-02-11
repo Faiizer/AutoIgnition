@@ -24,7 +24,8 @@ public class AutoIgnitionConfig {
     private boolean EnableAutoFuelStop = true;
     private List<String> BlacklistedFuelItems = new ArrayList<>(List.of("Wood_Sallow_Trunk"));
     private List<String> BlacklistedInputItems = new ArrayList<>(List.of("Ingredient_Bar_Gold"));
-    private List<String> BlacklistedProcessorBenches = new ArrayList<>();
+    private List<String> BlacklistedProcessorBenches = new ArrayList<>(
+            List.of("Quarry_Block_Iron", "Quarry_Block_Thorium", "Quarry_Block_Cobalt", "Quarry_Block_Adamantite"));
 
 
     public AutoIgnitionConfig() { }

@@ -37,7 +37,7 @@ public class AutoIgnitionSystem extends EntityTickingSystem<ChunkStore> {
     ) {
         ProcessingBenchState bench = archetypeChunk.getComponent(entityIndex, this.benchComponentType);
         if (bench == null) return;
-        if (AutoIgnitionMod.getConfig().getBlacklistedProcessorBenches().contains(bench.getBench().getId())) return;
+        if (AutoIgnitionMod.getConfig().getBlacklistedProcessorBenches().contains(bench.getBaseBlockType().getId())) return;
 
         WorldChunk chunk = bench.getChunk();
         if (chunk == null) return;
