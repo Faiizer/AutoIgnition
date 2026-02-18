@@ -1,7 +1,7 @@
 {
     "Group": "AutoIgnition",
     "Name": "AutoIgnition",
-    "Version": "3.0.4",
+    "Version": "3.0.5",
     "Description": "Automated fuel management and auto-ignition for crafting benches. Effortlessly syncs inputs and outputs with nearby storage.",
     "Authors": [
         {

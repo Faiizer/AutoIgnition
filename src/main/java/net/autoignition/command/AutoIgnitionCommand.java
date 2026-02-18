@@ -50,7 +50,7 @@ public class AutoIgnitionCommand extends AbstractCommand {
                 .map(AuthorInfo::getName)
                 .collect(Collectors.joining(", "));
         String modWebsite = manifest.getWebsite();
-        SemverRange modServerVersion = manifest.getServerVersion();
+        String modServerVersion = manifest.getServerVersion();
 
         String infoMessage = """
             
