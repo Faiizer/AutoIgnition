@@ -16,6 +16,6 @@
     "Website": "https://www.curseforge.com/hytale/mods/autoignition",
     "Main": "net.autoignition.AutoIgnitionMod",
     "DisabledByDefault": false,
-    "ServerVersion": "*",
+    "ServerVersion": "2026.02.17-255364b8e",
     "IncludesAssetPack": true
 }
