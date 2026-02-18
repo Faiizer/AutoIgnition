@@ -1,7 +1,7 @@
 {
     "Group": "AutoIgnition",
     "Name": "AutoIgnition",
-    "Version": "3.0.4",
+    "Version": "3.0.5",
     "Description": "Automated fuel management and auto-ignition for crafting benches. Effortlessly syncs inputs and outputs with nearby storage.",
     "Authors": [
         {
@@ -16,6 +16,6 @@
     "Website": "https://www.curseforge.com/hytale/mods/autoignition",
     "Main": "net.autoignition.AutoIgnitionMod",
     "DisabledByDefault": false,
-    "ServerVersion": "*",
+    "ServerVersion": "2026.02.17-255364b8e",
     "IncludesAssetPack": true
 }
